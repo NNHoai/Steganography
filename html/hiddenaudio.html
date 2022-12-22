@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Steganography Online</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="apple-touch-icon" href="../assets/img/apple-icon.png">
+  <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.ico">
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/css/boxicon.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/templatemo.css">
+  <link rel="stylesheet" href="../assets/css/custom.css">  
+ 
+</head>
+<body>
+  <!-- Header -->
+  <nav id="main_nav" class="navbar navbar-expand-lg navbar-light bg-white shadow">
+    <div class="container d-flex justify-content-between align-items-center">
+        <a class="navbar-brand h1" href="../index.html">
+            <i class='bx bx-buildings bx-sm text-dark'></i>
+            <span class="text-dark h4">Steganogrphy</span> <span class="text-primary h4">Online</span>
+        </a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-toggler-success" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="navbar-toggler-success">
+            <div class="flex-fill mx-xl-5 mb-2">
+                <ul class="nav navbar-nav d-flex justify-content-between mx-xl-5 text-center text-dark">
+                    <li class="nav-item">
+                        <a class="nav-link btn-outline-primary rounded-pill px-3" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn-outline-primary rounded-pill px-3" href="#.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn-outline-primary rounded-pill px-3" href="#.html">Work</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn-outline-primary rounded-pill px-3" href="#.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar align-self-center d-flex">
+                <a class="nav-link" href="#"><i class='bx bx-bell bx-sm bx-tada-hover text-primary'></i></a>
+                <a class="nav-link" href="#"><i class='bx bx-cog bx-sm text-primary'></i></a>
+                <a class="nav-link" href="#"><i class='bx bx-user-circle bx-sm text-primary'></i></a>
+            </div>
+        </div>
+    </div>
+  </nav>
+  <!-- Close Header -->
+  <div class="container">
+    <div class="endecode">  
+      <ul class="encodenav encode-tabs" id="tabs" data-tabs="tabs">
+        <li role="presentation" class="active"> <a href="#encode" data-toggle="tab">Encode</a></li>
+        <li role="presentation"> <a href="#decode" data-toggle="tab">Decode</a></li>
+      </ul>
+    </div>
+    <div id="my-tab-content" class="tab-content">
+       
+      <div class="tab-pane active" id="encode">
+        <div>
+          <div class="encodealert encode-info">
+            <h4>Encode audio</h4>
+          </div>
+          <form class="form">
+            <div class="form-group">
+              <h4>Audio cover</h4>
+              <input id="audio_input" class="form-control" type="file"  accept="audio/*" onchange="loadaudio()">
+              <br>
+              <audio id="audio-element"
+                src=""
+                controls
+                style="width: 512px; display: none;">
+              </audio>
+            </div>
+            
+            <div class="form-group">
+              <h4>Image hidden</h4>
+              <div class="original" style="display: none;">
+                <canvas></canvas>
+              </div>
+              <input class="form-control" type="file" name="baseFile" onchange="previewEncodeImage()">
+            </div>
+
+            <div class="form-group">
+              <button class="encodebtn" onclick="encodeMessage()">Encode</button>
+            </div>
+          </form>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="error" style="display: none;"></div>
+        <div class="binary" style="display: none;">
+          <h3>Binary representation of your message</h3>
+          <textarea class="form-control message" style="word-wrap:break-word;">
+          </textarea>
+        </div>
+        <div class="images" style="display: none;">
+          <div class="original" style="display: none;">
+            <h3>Original</h3>
+            <canvas></canvas>
+          </div>
+          <div class="nulled" style="display: none;">
+            <h3>Normalized</h3>
+            <canvas></canvas>
+          </div>
+          <div class="message" style="display: none;">
+            <h3>Message hidden in image (right click <span class="glyphicon glyphicon-arrow-right"></span> save as)</h3>
+            <canvas></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="decode">
+        <div>
+          <div class="encodealert encode-info">
+            <h4>Decode audio</h4>
+          </div>
+          <form class="form">
+            <div class="form-group">
+              <h4>Audio cover</h4>
+              <input class="form-control" type="file" name="decodeFile" onchange="previewDecodeImage()">
+            </div>
+            <div class="form-group">
+              <button class="encodebtn" onclick="encodeMessage()">Encode</button>
+            </div>
+          </form>
+          <div class="clearfix"></div>
+        </div>
+        <div class="binary-decode" style="display: none;">
+          <h3>Hidden message</h3>
+          <textarea class="form-control message" style="word-wrap:break-word;">
+          </textarea>
+        </div>
+        <div class="decode" style="display: none;">
+          <h3>Input</h3>
+          <canvas></canvas>
+        </div>
+      </div>
+
+    </div>
+
+    <footer style="text-align: center; margin-top: 20px; margin-bottom: 10px;">
+      
+    </footer>
+  </div>
+
+  <style>
+    canvas {
+      max-width: 100%;
+    }
+  </style>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <script type="text/JavaScript" src="../js/hiddenaudio.js"></script>
+</body>
+</html>
